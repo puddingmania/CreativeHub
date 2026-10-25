@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loopstation Workstation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">◆</span><strong>CreativeHub</strong><span class="muted">workstation</span></div>
+    <div class="transport">
+      <button id="playButton" class="transport-button" title="Space">▶</button>
+      <button id="stopButton" class="transport-button">■</button>
+      <button id="loopButton" class="transport-button">↻</button>
+      <span id="timeReadout" class="time-readout">1.1.1</span>
+      <label class="bpm-control">BPM <input id="bpmInput" type="number" min="40" max="240" value="120"></label>
+    </div>
+    <div class="top-actions">
+      <button id="undoButton" title="Ctrl+C">↶</button>
+      <button id="redoButton" title="Ctrl+Y">↷</button>
+      <button id="saveProjectButton" title="Save project">SAVE</button>
+      <label class="project-load-button" title="Read project">READ<input id="projectInput" type="file" accept=".loopstation.json,.json"></label>
+      <button id="midiSettingsButton" title="MIDI settings">MIDI</button>
+      <button id="shortcutSettingsButton" title="Keyboard shortcuts">KEYS</button>
+      <button id="mappingButton" class="mapping-button" title="Shift+M">MAPPING <span>SHIFT+M</span></button>
+      <button id="themeButton" title="Change accent colour">●</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="workspace">
+      <div class="canvas-toolbar">
+        <div><span class="eyebrow">COMPOSITE CANVAS</span><span class="muted"> / output preview</span></div>
+        <div class="canvas-tools">
+          <button class="tool active" data-tool="select">↖</button>
+          <button class="tool" data-tool="pen">✎</button>
+          <button class="tool" data-tool="eraser" title="Erase drawing">⌫</button>
+          <label class="color-picker" title="Canvas colour"><input id="colorInput" type="color" value="#ffcf66"></label>
+          <label class="brush-size" title="Brush size">SIZE <input id="brushSize" type="range" min="1" max="32" value="5"><output id="brushSizeValue">5</output></label>
+          <button class="tool" data-tool="fill">▧</button>
+        </div>
+      </div>
+      <div id="canvasStage" class="canvas-stage">
+        <div class="canvas-empty"><span>OUTPUT CANVAS</span><small>Drop video, draw, or map parameters here</small></div>
+        <video id="videoPreview" class="video-preview" controls hidden></video>
+        <img id="picturePreview" class="picture-preview" alt="" hidden>
+        <canvas id="drawCanvas"></canvas>
+        <div id="pictureLayerMenu" class="picture-layer-menu" hidden>
+          <button data-layer="top">T · TOP LAYER</button>
+          <button data-layer="bottom">B · BOTTOM LAYER</button>
+        </div>
+        <div id="mappingOverlay" class="mapping-overlay" hidden>
+          <div class="mapping-head"><strong>PARAMETER MAPPING</strong><span>draw a curve to map time → CC</span></div>
+          <canvas id="mappingCanvas"></canvas>
+          <div class="mapping-footer"><span>0%</span><span>CC 01 / FILTER</span><span>100%</span></div>
+        </div>
+        <div id="cursorLine" class="cursor-line"></div>
+      </div>
+    </section>
+
+    <section id="arrangement" class="timeline-panel">
+      <div id="arrangementPlayhead" class="arrangement-playhead"></div>
+      <div class="ruler-row">
+        <div class="track-label ruler-label">TIMELINE</div>
+        <div id="ruler" class="ruler"></div>
+      </div>
+      <div class="track-row master-row">
+        <div class="track-label"><span class="track-dot output"></span><span>OUTPUT</span><small>MASTER</small></div>
+        <div class="track-lane"><div class="loop-region"></div></div>
+      </div>
+      <div class="track-row video-row">
+        <div class="track-label"><span class="track-dot video"></span><span>VIDEO</span><small>MEDIA</small><label class="add-clip" title="Add video">+<input id="videoInput" type="file" accept="video/*"></label></div>
+        <div class="track-lane">        <div class="video-clip" id="videoClip"><b>VIDEO CLIP</b><small>00:00:00</small></div></div>
+      </div>
+      <div class="track-row drawing-row">
+        <div class="track-label"><span class="track-dot drawing"></span><span>DRAWING</span><small>ANIMATION</small></div>
+        <div class="track-lane"><div id="drawingFramesLane" class="drawing-frames-lane"></div></div>
+      </div>
+      <div class="track-row picture-row">
+        <div class="track-label"><span class="track-dot picture"></span><span>PICTURE</span><small>IMAGE SEQUENCE · RIGHT CLICK, T/B LAYER</small><label class="add-clip" title="Import picture">+<input id="pictureInput" type="file" accept="image/jpeg,image/png,image/webp"></label></div>
+        <div class="track-lane"><div id="pictureFramesLane" class="picture-frames-lane"></div></div>
+      </div>
+      <div class="section-title"><span>DAW / MIDI</span><div class="section-actions"><label class="file-button">IMPORT VST<input id="vstInput" type="file" accept=".vst,.vst3,.dll,.zip"></label><button id="recordButton">● RECORD</button><button id="addTrackButton">+ ADD TRACK</button></div></div>
+      <div id="trackList"></div>
+      <div id="instrumentPanel" class="instrument-panel" hidden>
+        <div class="panel-heading"><strong id="instrumentTitle">PIANO ROLL</strong><button id="closeInstrument">×</button></div>
+        <div class="piano-roll-editor">
+          <div class="piano-key-column" id="pianoKeyColumn"></div>
+          <div class="piano-roll-grid-wrap">
+            <div class="piano-roll-x-axis" id="pianoRollSteps"></div>
+            <div class="piano-roll-stage">
+              <div class="piano-roll" id="pianoRoll"></div>
+              <div id="pianoRollCursor" class="piano-roll-cursor" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="shortcutSettings" class="settings-dialog" hidden>
+    <div class="settings-card shortcut-card">
+      <div class="panel-heading"><strong>KEYBOARD SHORTCUTS</strong><button id="closeShortcutSettings">×</button></div>
+      <p class="settings-help">Click a shortcut field, then press a key combination. New shortcuts can be added to this registry later without changing the editor.</p>
+      <div id="shortcutList" class="shortcut-list"></div>
+      <div class="midi-settings-actions"><button id="resetShortcutsButton">RESET DEFAULTS</button><span id="shortcutCaptureStatus">Ready</span></div>
+    </div>
+  </div>
+
+  <div id="midiSettings" class="settings-dialog" hidden>
+    <div class="settings-card">
+      <div class="panel-heading"><strong>MIDI SETTINGS</strong><button id="closeMidiSettings">×</button></div>
+      <p class="settings-help">Connect a keyboard input and optionally send MIDI to an output device.</p>
+      <label class="settings-field">KEYBOARD INPUT<select id="midiInputSelect"><option value="">No input selected</option></select></label>
+      <label class="settings-field">MIDI OUTPUT<select id="midiOutputSelect"><option value="">No output selected</option></select></label>
+      <div class="midi-settings-actions"><button id="refreshMidiButton">REFRESH DEVICES</button><span id="midiConnectionStatus">Not connected</span></div>
+      <small id="midiSupportMessage" class="settings-note"></small>
+    </div>
+  </div>
+
+  <footer class="statusbar">
+    <span><i class="status-dot"></i> LOCAL SESSION</span>
+    <span id="statusMessage">Ready · shared clock active</span>
+    <span>44.1 kHz · 24 bit <b>●</b></span>
+  </footer>
+  <script src="timeline.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
