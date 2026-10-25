@@ -1,7 +1,7 @@
 <p align="center">
-  #CreativeHub
+  CreativeHub
 </p>
 
 <p align="center">
-  !"penal layout"
+  ![penal layout]
 </p>
