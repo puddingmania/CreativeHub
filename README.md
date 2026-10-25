@@ -12,7 +12,8 @@ or you might end up yelling in frustration when a program crashes due to an erro
 This software is designed to solve those problems.(it is still a prototype)  
 
 Strengths of this software:  
-Lightweight: Runs smoothly in a browser  
+Lightweight: Runs smoothly in a browser 
+Shortcut: The workflow will be very efficient using with vim(web extension)  
 Workstation: Consolidates three programs, allowing you to instantly check the status of each frame  
 Pipeline (planning): Enhanced integration with other open-source tools like openutau, djay etc.  
 Feedback: If you got any request, feel free to pull or send issues.
