@@ -9,7 +9,7 @@
 <p align="center">
 The Purpose of This Project: When engaging in creative work, you often have to deal with various problems. For example, you might get frustrated switching back and forth between different software programs,  
 or you might end up yelling in frustration when a program crashes due to an error.  
-This software is designed to solve those problems.  
+This software is designed to solve those problems.(it is still a prototype)  
 
 Strengths of this software:  
 Lightweight: Runs smoothly in a browser  
