@@ -18,3 +18,10 @@ Workstation: Consolidates three programs, allowing you to instantly check the st
 Pipeline (planning): Enhanced integration with other open-source tools like openutau, djay etc.  
 Feedback: If you got any request, feel free to pull or send issues.
 </p>
+
+#How to use
+
+**cd C:\Users\yom11\daw-self
+py -m http.server 8000
+python -m http.server 8000
+run http://localhost:8000 on browser**
