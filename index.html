@@ -37,12 +37,12 @@
           <button class="tool" data-tool="pen">✎</button>
           <button class="tool" data-tool="eraser" title="Erase drawing">⌫</button>
           <label class="color-picker" title="Canvas colour"><input id="colorInput" type="color" value="#ffcf66"></label>
-          <label class="brush-size" title="Brush size">SIZE <input id="brushSize" type="range" min="1" max="32" value="5"><output id="brushSizeValue">5</output></label>
+          <label class="brush-size" title="Brush size (1-9)">SIZE <input id="brushSize" type="range" min="1" max="32" value="5"><output id="brushSizeValue">5</output></label>
           <button class="tool" data-tool="fill">▧</button>
         </div>
       </div>
       <div id="canvasStage" class="canvas-stage">
-        <div class="canvas-empty"><span>OUTPUT CANVAS</span><small>Drop video, draw, or map parameters here</small></div>
+        <div class="canvas-empty"></div>
         <video id="videoPreview" class="video-preview" controls hidden></video>
         <img id="picturePreview" class="picture-preview" alt="" hidden>
         <canvas id="drawCanvas"></canvas>
@@ -81,13 +81,13 @@
         <div class="track-label"><span class="track-dot picture"></span><span>PICTURE</span><small>IMAGE SEQUENCE · RIGHT CLICK, T/B LAYER</small><label class="add-clip" title="Import picture">+<input id="pictureInput" type="file" accept="image/jpeg,image/png,image/webp"></label></div>
         <div class="track-lane"><div id="pictureFramesLane" class="picture-frames-lane"></div></div>
       </div>
-      <div class="section-title"><span>DAW / MIDI</span><div class="section-actions"><label class="file-button">IMPORT VST<input id="vstInput" type="file" accept=".vst,.vst3,.dll,.zip"></label><button id="recordButton">● RECORD</button><button id="addTrackButton">+ ADD TRACK</button></div></div>
+      <div class="section-title"><span>DAW / MIDI</span><div class="section-actions"><button id="recordButton">● RECORD</button><button id="addTrackButton">+ ADD TRACK</button></div></div>
       <div id="trackList"></div>
       <div id="instrumentPanel" class="instrument-panel" hidden>
-        <div class="panel-heading"><strong id="instrumentTitle">PIANO ROLL</strong><button id="closeInstrument">×</button></div>
+        <div class="panel-heading"><strong id="instrumentTitle"><button>I</button> ROLL</strong><button id="closeInstrument">×</button></div>
         <div class="piano-roll-editor">
           <div class="piano-key-column" id="pianoKeyColumn"></div>
-          <div class="piano-roll-grid-wrap">
+          <div class="piano-roll-grid-wrap" id="pianoRollGridWrap">
             <div class="piano-roll-x-axis" id="pianoRollSteps"></div>
             <div class="piano-roll-stage">
               <div class="piano-roll" id="pianoRoll"></div>
@@ -119,6 +119,7 @@
     </div>
   </div>
 
+  <div id="vstMenu" class="vst-menu" hidden></div>
   <footer class="statusbar">
     <span><i class="status-dot"></i> LOCAL SESSION</span>
     <span id="statusMessage">Ready · shared clock active</span>

@@ -1,0 +1,4 @@
+cd C:\Users\your_user\where_you_place_the_file
+py -m http.server 8000
+python -m http.server 8000
+##run http://localhost:8000 on browser to get full vst experience 
