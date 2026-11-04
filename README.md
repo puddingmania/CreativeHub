@@ -5,7 +5,7 @@
 The Purpose of This Project: When engaging in creative work, you often have to deal with various problems. For example, you might get frustrated switching back and forth between different software programs,  
 or you might end up yelling in frustration when a program crashes due to an error.  
 
-his software is designed to solve those problems.(it is the first release)  
+This software is designed to solve those problems.(it is the first release)  
 
 Strengths of this software:  
 Lightweight: Runs smoothly in a browser 
