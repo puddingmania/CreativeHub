@@ -1,5 +1,4 @@
-
-<img width="2510" height="1426" alt="スクリーンショット 2026-11-04 171112" src="https://github.com/user-attachments/assets/b6cb58da-0161-4210-82a2-004bba0d69fe" />
+<img width="1270" height="1425" alt="スクリーンショット 2026-11-24 211652" src="https://github.com/user-attachments/assets/55410835-e18e-4c40-8b9d-774a1975dc6a" />
 
 <p align="center">
 The Purpose of This Project: When engaging in creative work, you often have to deal with various problems. For example, you might get frustrated switching back and forth between different software programs,  
