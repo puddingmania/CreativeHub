@@ -8,7 +8,7 @@ This software is designed to solve those problems.(it is the first release)
 
 Strengths of this software:  
 Lightweight: Runs smoothly in a browser  
-Shortcut: The workflow will be very efficient using with vim(web extension)  
+Shortcut: The workflow will be very efficient using with vim(web extension)and fully customizable shortcuts incorporated  
 Workstation: Consolidates three programs, allowing you to instantly check the status of each frame  
-Pipeline (planning): Enhanced integration with other open-source tools like openutau, djay etc.  
+Pipeline (planning): Enhanced integration with other open-source tools like openutau, Mixxx and live performance software etc.  
 
